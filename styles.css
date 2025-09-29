@@ -11,6 +11,17 @@
     box-sizing: border-box;
 }
 
+html {
+    /* Better mobile viewport handling */
+    height: -webkit-fill-available;
+}
+
+@media (max-width: 768px) {
+    html {
+        overflow-x: hidden;
+    }
+}
+
 body {
     font-family: 'Afrah', serif;
     height: 100vh;
@@ -21,6 +32,18 @@ body {
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
+}
+
+/* Mobile-specific background */
+@media (max-width: 768px) {
+    body {
+        background-image: url('phone-Background-1.png');
+        background-size: cover;
+        background-position: center;
+        background-attachment: scroll;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
 }
 
 .container {
@@ -35,6 +58,15 @@ body {
     transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* Mobile: adjust container to use available height */
+@media (max-width: 768px) {
+    .container {
+        height: 100dvh; /* Use dynamic viewport height on mobile */
+        min-height: -webkit-fill-available;
+        padding: 2rem 1rem;
+    }
+}
+
 .container.slide-left {
     transform: translateX(-100%);
 }
@@ -45,6 +77,22 @@ body {
     flex-direction: column;
     align-items: center;
     gap: 2rem;
+}
+
+@media (max-width: 768px) {
+    .content {
+        gap: 1.2rem;
+        width: 100%;
+        max-width: 90%;
+        transform: translateY(-5%);
+    }
+}
+
+@media (max-width: 480px) {
+    .content {
+        gap: 1rem;
+        transform: translateY(-8%);
+    }
 }
 
 .logo {
@@ -128,38 +176,49 @@ body {
 /* Responsive design */
 @media (max-width: 768px) {
     .logo {
-        width: 300px;
+        width: 240px;
+        margin-bottom: 0.5rem;
     }
     
     .main-heading {
-        font-size: 2.5rem;
-        letter-spacing: 0.1em;
+        font-size: 1.7rem;
+        letter-spacing: 0.12em;
+        line-height: 1.2;
     }
     
     .subheading {
-        font-size: 1.5rem;
+        font-size: 1.1rem;
         letter-spacing: 0.15em;
+    }
+    
+    .subheading-link {
+        font-size: 1.1rem;
+        letter-spacing: 0.15em;
+        padding-bottom: 0.35rem;
     }
 }
 
 @media (max-width: 480px) {
     .logo {
-        width: 250px;
+        width: 200px;
+        margin-bottom: 0.35rem;
     }
     
     .main-heading {
-        font-size: 1.8rem;
-        letter-spacing: 0.08em;
+        font-size: 1.4rem;
+        letter-spacing: 0.1em;
+        line-height: 1.2;
     }
     
     .subheading {
-        font-size: 1.2rem;
-        letter-spacing: 0.12em;
+        font-size: 0.95rem;
+        letter-spacing: 0.14em;
     }
     
     .subheading-link {
-        font-size: 1.2rem;
-        letter-spacing: 0.12em;
+        font-size: 0.95rem;
+        letter-spacing: 0.14em;
+        padding-bottom: 0.3rem;
     }
 }
 
@@ -176,6 +235,16 @@ body {
     z-index: 100;
 }
 
+/* Mobile: use dynamic viewport height and ensure scrolling */
+@media (max-width: 768px) {
+    .inquiry-panel {
+        height: 100dvh;
+        min-height: -webkit-fill-available;
+        overflow-y: scroll;
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
 .inquiry-panel.active {
     transform: translateX(0);
 }
@@ -185,6 +254,14 @@ body {
     margin: 0 auto;
     padding: 2rem 2.5rem;
     min-height: 100vh;
+}
+
+/* Mobile: ensure proper spacing with browser chrome */
+@media (max-width: 768px) {
+    .inquiry-panel-content {
+        min-height: 100dvh;
+        padding: 1.5rem 1.5rem 3rem;
+    }
 }
 
 .back-link {
@@ -351,11 +428,12 @@ body {
 
 @media (max-width: 768px) {
     .inquiry-panel-content {
-        padding: 2rem 1.5rem;
+        padding: 2rem 1.5rem 5rem;
     }
     
     .inquiry-form {
-        gap: 2.5rem;
+        gap: 1.5rem;
+        padding-bottom: 3rem;
     }
     
     .form-group input[type="text"],
@@ -365,20 +443,35 @@ body {
     .form-group select,
     .form-group textarea {
         font-size: 1rem;
+        padding: 0.5rem 0;
     }
     
     .checkbox-grid {
         grid-template-columns: 1fr;
     }
+    
+    .back-link {
+        margin-bottom: 1.5rem;
+        font-size: 0.85rem;
+    }
+    
+    .submit-button {
+        margin-bottom: 2rem;
+    }
 }
 
 @media (max-width: 480px) {
     .inquiry-panel-content {
-        padding: 1.5rem 1rem;
+        padding: 1.5rem 1.25rem 6rem;
     }
     
     .inquiry-form {
-        gap: 2rem;
+        gap: 1.25rem;
+        padding-bottom: 3.5rem;
+    }
+    
+    .form-group {
+        gap: 0.5rem;
     }
     
     .form-group input[type="text"],
@@ -388,10 +481,12 @@ body {
     .form-group select,
     .form-group textarea {
         font-size: 0.95rem;
+        padding: 0.45rem 0;
     }
     
     .form-group label {
-        font-size: 0.75rem;
+        font-size: 0.7rem;
+        letter-spacing: 0.1em;
     }
     
     .checkbox-item {
@@ -401,5 +496,41 @@ body {
     .submit-button {
         width: 100%;
         text-align: center;
+        font-size: 0.9rem;
+        padding: 0.8rem 2rem;
+        margin-top: 0.5rem;
+        margin-bottom: 2.5rem;
+    }
+    
+    .back-link {
+        font-size: 0.8rem;
+        margin-bottom: 1.25rem;
+    }
+}
+
+/* Standalone Inquiry Page Styles */
+.inquiry-container {
+    width: 100%;
+    min-height: 100vh;
+    overflow-y: auto;
+    padding: 2rem;
+}
+
+.inquiry-content {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+    .inquiry-container {
+        min-height: 100dvh;
+        padding: 2rem 1.5rem 5rem;
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+@media (max-width: 480px) {
+    .inquiry-container {
+        padding: 1.5rem 1.25rem 6rem;
     }
 }
