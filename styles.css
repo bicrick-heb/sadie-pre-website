@@ -37,7 +37,7 @@ body {
 /* Mobile-specific background */
 @media (max-width: 768px) {
     body {
-        background-image: url('phone-Background-1.png');
+        background-image: url('phone-1.png');
         background-size: cover;
         background-position: center;
         background-attachment: scroll;
